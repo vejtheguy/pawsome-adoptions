@@ -5,7 +5,7 @@ import Home from "./home/home";
 function App() {
   return (
     <div className="flex flex-col w-full min-h-screen items-center bg-psWhite">
-      <BrowserRouter>
+      <BrowserRouter basename="/thats-so-fetch">
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
