@@ -9,7 +9,7 @@ const LogoutButton = () => {
       method: "POST",
       credentials: "include",
     });
-    nav("/login");
+    nav("/");
   };
 
   return (

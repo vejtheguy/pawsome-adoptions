@@ -8,7 +8,7 @@ const HeaderNav = () => {
       </span>
       <nav className="px-6 flex flex-wrap justify-between items-center max-w-screen-xl mx-auto">
         <a
-          href="/home"
+          href="#/home"
           className="flex items-center hover:text-psCoral text-white font-poppins group"
         >
           <svg
