@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import baseURL from "../api/api";
+import baseURL from "../api/baseUrl";
 import { useNavigate } from "react-router";
 
 const Auth = () => {

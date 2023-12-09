@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import baseURL from "../api/api";
+import baseURL from "../api/baseUrl";
 
 const LogoutButton = () => {
   const nav = useNavigate();
