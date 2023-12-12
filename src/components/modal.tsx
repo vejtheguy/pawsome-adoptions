@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
 
 interface ModalProps {
   onClose: () => void;
@@ -11,12 +10,14 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
+  // Check if mouse click occurs outside of modal; trigger onClose if true
   const handleClickOutside = (event: MouseEvent) => {
     if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
       onClose();
     }
   };
 
+  // Add event listener for clicking outside of of modal
   useEffect(() => {
     const handleDocumentClick = (event: MouseEvent) => {
       handleClickOutside(event);
@@ -29,7 +30,16 @@ const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
     };
   }, [onClose]);
 
-  return ReactDOM.createPortal(
+  // Prevent background scrolling when modal is open
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
+  return (
     <div className="fixed top-0 left-0 w-full h-full bg-psBlue bg-opacity-40 flex items-center justify-center backdrop-blur-[2px] cursor-pointer">
       <div
         className="relative flex justify-center items-center max-w-4xl"
@@ -43,8 +53,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
           onClick={onClose}
         />
       </div>
-    </div>,
-    document.body
+    </div>
   );
 };
 
