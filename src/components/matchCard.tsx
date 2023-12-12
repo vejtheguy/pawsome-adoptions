@@ -17,27 +17,22 @@ interface MatchCardProps {
 const MatchCard: React.FC<MatchCardProps> = ({ dog, onClose }) => {
   if (!dog) {
     return (
-      <span className="text-6xl font-bold text-psCoral">
-        No matched dog available.
-      </span>
+      <Modal onClose={onClose}>
+        <span className="bg-psWhite rounded-lg overflow-hidden cursor-default relative flex flex-col gap-12 sm:gap-6 justify-center items-center p-8 h-full w-full">
+          <span className="text-6xl font-bold text-psCoral">
+            No matched dog available.
+          </span>
+        </span>
+      </Modal>
     );
   }
 
   const { img, name, age, breed } = dog;
-  const isPuppy = (age: number) => {
-    return;
-  };
-
-  const startsWithVowel = (word: string) => {
-    const lowerCaseWord = word.toLowerCase();
-    const vowels = ["a", "e", "i", "o", "u"];
-    return vowels.includes(lowerCaseWord.charAt(0));
-  };
 
   return (
     <Modal onClose={onClose}>
-      <span className="bg-psWhite rounded-lg overflow-hidden cursor-default relative flex flex-col gap-6 items-center p-8">
-        <h2 className="text-6xl font-bold text-psDarkGray text-center">
+      <span className="bg-psWhite rounded-lg overflow-hidden cursor-default relative flex flex-col gap-12 sm:gap-6 justify-center items-center p-8 h-full">
+        <h2 className="text-7xl font-bold text-psDarkGray text-center sm:text-6xl">
           Say hello to your perfect{" "}
           <span className="text-psCoral">pawsome</span> friend!
         </h2>
@@ -46,15 +41,15 @@ const MatchCard: React.FC<MatchCardProps> = ({ dog, onClose }) => {
           alt={name}
           className="w-full h-[500px] object-cover rounded-lg"
         />
-        <div className="flex justify-center items-center">
+        <div className="flex flex-col sm:flex-row justify-center items-center">
           <h3
-            className={`font-semibold mb-2 text-psDarkGray basis-1/3 text-right  pr-8 ${
-              name.length > 5 ? "text-6xl" : "text-7xl"
+            className={`font-semibold mb-2 text-psDarkGray sm:basis-1/3 sm:text-right sm:pr-8 ${
+              name.length > 5 ? "sm:text-6xl text-7xl" : "text-7xl"
             }`}
           >
             Meet <span className="text-psCoral">{name}!</span>
           </h3>
-          <span className="basis-2/3 pl-8 text-xl text-justify border-l-2 border-psMediumGray">
+          <span className="text-4xl leading-tight text-center mt-6 sm:basis-2/3 sm:pl-8 sm:mt-0 sm:text-xl sm:text-justify sm:border-l-2 sm:border-psMediumGray">
             <span className="text-psCoral font-semibold">{name}</span> is a{" "}
             {age === 0 ? "young puppy" : `${age}-year-old`}{" "}
             {breed.toLowerCase()}. This lovable companion is sure to bring joy,
