@@ -182,24 +182,21 @@ const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
     });
   };
 
-  const handleFavorites = (dogId: Dog) => {
-    // Check if the dogId is already in the array
-    if (favorites.includes(dogId)) {
-      // If it is, remove it
-      setFavorites((prevFavorites) =>
-        prevFavorites.filter((id) => id !== dogId)
+  // Handle favorites being added or removed from list
+  const handleFavorites = (dog: Dog) => {
+    setFavorites((prevFavorites) => {
+      const isFavorite = prevFavorites.some(
+        (favoriteDog) => favoriteDog.id === dog.id
       );
-      handleRemoveFavorite(dogId);
-    } else {
-      // If it's not, add it
-      setFavorites((prevFavorites) => [...prevFavorites, dogId]);
-    }
-  };
 
-  const handleRemoveFavorite = (id: Dog) => {
-    setFavorites((prevFavorites) =>
-      prevFavorites.filter((favId) => favId !== id)
-    );
+      if (isFavorite) {
+        // If it is, remove it
+        return prevFavorites.filter((favoriteDog) => favoriteDog.id !== dog.id);
+      } else {
+        // If it's not, add it
+        return [...prevFavorites, dog];
+      }
+    });
   };
 
   const handleGenerateMatch = async () => {
