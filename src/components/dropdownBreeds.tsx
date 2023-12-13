@@ -1,4 +1,6 @@
 // Dropdown.tsx
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import React, { useState, useEffect, useRef } from "react";
 
 interface DropdownBreedsProps {
@@ -14,10 +16,12 @@ const DropdownBreeds: React.FC<DropdownBreedsProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Handles the boolean of when to open and close the dropdown
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
+  // Handle checkbox selections
   const handleOptionChange = (option: string) => {
     if (selectedOptions.includes(option)) {
       setSelectedOptions(selectedOptions.filter((item) => item !== option));
@@ -26,8 +30,8 @@ const DropdownBreeds: React.FC<DropdownBreedsProps> = ({
     }
   };
 
+  // Check if mouse click occurs outside of modal; trigger onClose if true
   const handleClickOutside = (event: MouseEvent) => {
-    // Use type assertion to tell TypeScript that dropdownRef.current is not null
     if (
       dropdownRef.current &&
       !dropdownRef.current.contains(event.target as Node)
@@ -36,20 +40,20 @@ const DropdownBreeds: React.FC<DropdownBreedsProps> = ({
     }
   };
 
+  // Add event listener for clicking outside of of modal
   useEffect(() => {
     const handleDocumentClick = (event: MouseEvent) => {
       handleClickOutside(event);
     };
 
-    // Attach the event listener when the component mounts
     document.addEventListener("mousedown", handleDocumentClick);
 
-    // Detach the event listener when the component unmounts
     return () => {
       document.removeEventListener("mousedown", handleDocumentClick);
     };
-  }, []); // Ensure the effect runs only once during mount and unmount
+  }, []);
 
+  // Notify the parent component when the selected options change
   useEffect(() => {
     onSelect(selectedOptions);
   }, [selectedOptions, onSelect]);
@@ -59,11 +63,12 @@ const DropdownBreeds: React.FC<DropdownBreedsProps> = ({
       <div>
         <button
           type="button"
-          className="flex justify-center w-full rounded-md shadow-sm px-4 py-3 bg-white text-sm font-semibold text-gray-700 hover:bg-psCoral hover:text-white active:bg-gray-200 transition duration-200"
+          className="flex justify-between items-center w-full rounded-md shadow-sm px-4 py-3 bg-white text-sm font-semibold text-psDarkGray hover:bg-psCoral hover:text-white transition duration-300"
           id="options-menu"
           onClick={handleToggle}
         >
           Select Breeds
+          <FontAwesomeIcon icon={faAngleDown} size="lg" />
         </button>
       </div>
 
