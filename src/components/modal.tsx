@@ -40,7 +40,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-psBlue bg-opacity-40 flex items-center justify-center backdrop-blur-[2px] cursor-pointer">
+    <div className="fixed top-0 left-0 w-full h-full bg-psBlue bg-opacity-40 flex items-center justify-center backdrop-blur-[2px] cursor-pointer z-20">
       <div
         className="relative flex justify-center items-center max-w-4xl h-full sm:h-fit"
         ref={modalRef}

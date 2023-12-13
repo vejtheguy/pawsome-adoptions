@@ -2,7 +2,7 @@ import LogoutButton from "../auth/logout";
 
 const HeaderNav = () => {
   return (
-    <header className="py-4 bg-psBlue w-full sticky top-0 z-50">
+    <header className="py-4 bg-psBlue w-full sticky top-0 z-10">
       <span className="bg-psBlue bg-opacity-60 absolute top-full h-2 w-full ">
         <span className="bg-psBlue bg-opacity-30 absolute top-full h-2 w-full"></span>
       </span>
@@ -18,7 +18,7 @@ const HeaderNav = () => {
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
             role="img"
-            className="group-hover:animate-bounce -rotate-6 group-hover:-rotate-6"
+            className="group-hover:animate-bouncing -rotate-6"
             preserveAspectRatio="xMidYMid meet"
           >
             <path
