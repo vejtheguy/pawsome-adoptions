@@ -11,7 +11,7 @@ const SortingFilter: React.FC<SortingProps> = ({
 }) => {
   return (
     <div>
-      <label htmlFor="selectOption" className="text-psDarkGray">
+      <label htmlFor="selectOption" className="text-psDarkGray mr-1">
         Sort by:
       </label>
       <select
