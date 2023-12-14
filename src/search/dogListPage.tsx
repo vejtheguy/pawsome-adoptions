@@ -66,7 +66,7 @@ const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
   const [favorites, setFavorites] = useState<Dog[]>(initialFavorites);
 
   const itemStart = (currentPage - 1) * postsPerPage + 1;
-  const itemsOnPage = from + postsPerPage;
+  const itemsOnPage = Math.min(from + postsPerPage, resultIds.length);
 
   useEffect(() => {
     fetchBreedNames();
@@ -81,6 +81,18 @@ const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
     from,
   ]);
 
+  // Reset current page to 1 when any of the dependencies change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [
+    selectedBreeds,
+    sortDirection,
+    sortValue,
+    zipCodes,
+    ageRange,
+    postsPerPage,
+  ]);
+
   useEffect(() => {}, [breeds, zipCodes]);
 
   useEffect(() => {
@@ -89,7 +101,7 @@ const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
 
   useEffect(() => {
     handleFrom();
-  }, [totalPages, postsPerPage, from]);
+  }, [postsPerPage, from]);
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
@@ -148,8 +160,6 @@ const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
 
   // Handle amount of cards on the page
   const handlePostsPerPage = (value: number) => {
-    // const newPostsPerPage = parseInt(event.target.value, 10);
-
     // Update the postsPerPage state
     setPostsPerPage(value);
 
@@ -158,8 +168,6 @@ const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
 
     // Update the totalPages state
     setTotalPages(newTotalPages);
-
-    setCurrentPage(1);
   };
 
   // Handles the calculation and adjustment of the 'from' value based on the current page and posts per page.
