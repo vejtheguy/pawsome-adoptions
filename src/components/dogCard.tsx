@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
 
 interface Dog {
   id: string;
@@ -36,13 +35,13 @@ const DogCard: React.FC<DogCardProps> = ({
           {name}, {age}
           <FontAwesomeIcon
             icon={favorite ? faHeartSolid : faHeartRegular}
-            className={`w-7 h-7 group-hover:text-psCoral group-hover:duration-300 ${
+            className={`text-3xl group-hover:text-psCoral group-hover:duration-300 ${
               favorite ? "text-psCoral animate-beat" : "text-psMediumGray"
             }`}
           />
         </h3>
-        <p className="text-psMediumGray ">{breed}</p>
-        <p className="text-psMediumGray ">Zip Code: {zip_code}</p>
+        <p className="text-psMediumGray">{breed}</p>
+        <p className="text-psMediumGray">Zip Code: {zip_code}</p>
       </div>
     </li>
   );
