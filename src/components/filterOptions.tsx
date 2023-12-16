@@ -96,7 +96,11 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
               Selected Breeds:{" "}
               {selectedBreeds.length === 0 ? "Any" : selectedBreeds.join(", ")}
             </span>
-            <DropdownBreeds options={breeds} onSelect={handleBreedSelect} />
+            <DropdownBreeds
+              options={breeds}
+              selectedOptions={selectedBreeds}
+              onSelect={handleBreedSelect}
+            />
           </span>
           <span className="py-4 flex flex-col gap-3 justify-center border-b border-psMediumGray">
             <h4 className="text-psDarkGray text-xl font-semibold">Age</h4>

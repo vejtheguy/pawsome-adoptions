@@ -5,14 +5,15 @@ import React, { useState, useEffect, useRef } from "react";
 
 interface DropdownBreedsProps {
   options: string[];
+  selectedOptions: string[];
   onSelect: (selectedOptions: string[]) => void;
 }
 
 const DropdownBreeds: React.FC<DropdownBreedsProps> = ({
   options,
+  selectedOptions,
   onSelect,
 }) => {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -24,9 +25,9 @@ const DropdownBreeds: React.FC<DropdownBreedsProps> = ({
   // Handle checkbox selections
   const handleOptionChange = (option: string) => {
     if (selectedOptions.includes(option)) {
-      setSelectedOptions(selectedOptions.filter((item) => item !== option));
+      onSelect(selectedOptions.filter((item) => item !== option));
     } else {
-      setSelectedOptions([...selectedOptions, option]);
+      onSelect([...selectedOptions, option]);
     }
   };
 
@@ -52,11 +53,6 @@ const DropdownBreeds: React.FC<DropdownBreedsProps> = ({
       document.removeEventListener("mousedown", handleDocumentClick);
     };
   }, []);
-
-  // Notify the parent component when the selected options change
-  useEffect(() => {
-    onSelect(selectedOptions);
-  }, [selectedOptions, onSelect]);
 
   return (
     <div className="relative inline-block text-left" ref={dropdownRef}>
