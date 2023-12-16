@@ -6,10 +6,10 @@ const HeaderNav = () => {
       <span className="bg-psBlue bg-opacity-60 absolute top-full h-2 w-full ">
         <span className="bg-psBlue bg-opacity-30 absolute top-full h-2 w-full"></span>
       </span>
-      <nav className="px-6 flex flex-wrap justify-between items-center max-w-screen-xl mx-auto">
+      <nav className="sm:px-6 flex flex-col sm:flex-row justify-between items-center max-w-screen-xl mx-auto">
         <a
           href="#/home"
-          className="flex items-center hover:text-psCoral text-white font-poppins group"
+          className="flex items-center justify-center hover:text-psCoral text-white font-poppins group"
         >
           <svg
             width="50px"

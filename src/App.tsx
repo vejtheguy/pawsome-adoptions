@@ -4,7 +4,7 @@ import Home from "./home/home";
 
 function App() {
   return (
-    <div className="flex flex-col w-full min-h-screen items-center bg-psWhite">
+    <div className="bg-psWhite w-full">
       <HashRouter>
         <Routes>
           <Route path="/" element={<Login />} />

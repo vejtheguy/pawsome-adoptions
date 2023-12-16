@@ -28,10 +28,10 @@ function Home() {
   };
 
   return (
-    <div className="pb-20 w-full flex flex-col justify-center items-center gap-10">
+    <div className="pb-20 flex flex-col justify-center items-center sm:gap-10">
       <HeaderNav />
-      <div className="flex flex-col gap-4 justify-center items-center py-12 px-14 max-w-screen-xl rounded-lg bg-psLightBlue drop-shadow-lg cursor-default">
-        <h2 className="text-6xl font-bold text-psDarkGray font-poppins">
+      <div className="flex flex-col gap-4 justify-center items-center py-12 px-8 sm:px-14 max-w-screen-xl rounded-lg bg-psLightBlue drop-shadow-lg cursor-default mb-10 sm:mb-0 sm:mx-6">
+        <h2 className="text-5xl sm:text-6xl font-bold text-psDarkGray font-poppins text-center">
           Find Your <span className="text-psCoral">Fur-Ever</span> Match!
         </h2>
         <p className="text-center text-xl text-psDarkGray font-poppins px-4">
