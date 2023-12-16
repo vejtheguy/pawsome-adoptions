@@ -21,7 +21,7 @@ const AgeRangeInput: React.FC<AgeRangeProps> = ({
         max={ageRange[1]}
         step={1}
         value={ageRange[0]}
-        className="w-full bg-psLightGray"
+        className="w-full bg-psLightGray cursor-pointer"
         onChange={(e) => handleMinAgeChange(parseInt(e.target.value, 10))}
       />
       <label htmlFor="maxAge">Max Age: {ageRange[1]}</label>
@@ -32,7 +32,7 @@ const AgeRangeInput: React.FC<AgeRangeProps> = ({
         max={14}
         step={1}
         value={ageRange[1]}
-        className="w-full bg-psLightGray"
+        className="w-full bg-psLightGray cursor-pointer"
         onChange={(e) => handleMaxAgeChange(parseInt(e.target.value, 10))}
       />
     </div>
