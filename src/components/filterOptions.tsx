@@ -1,9 +1,6 @@
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import AgeRangeInput from "./ageRangeInput";
 import DropdownBreeds from "./dropdownBreeds";
-import FavoriteCard from "./favorites";
-import PostsPerPage from "./itemsPerPage";
-import SearchInput from "./searchInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 
@@ -14,8 +11,6 @@ interface FilterOptionsProps {
   ageRange: [number, number];
   handleMinAgeChange: (value: number) => void;
   handleMaxAgeChange: (value: number) => void;
-  postsPerPage: number;
-  handlePostsPerPage: (value: number) => void;
   zipCodeInput?: string;
   handleSearchByZipCode?: (value: string) => void;
   handleZipCodeInputChange?: (value: string) => void;
@@ -121,16 +116,6 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
           </span> */}
         </div>
       )}
-      {/* <span className="pt-4 pb-8 flex flex-col gap-6 justify-center">
-            <h4 className="text-psDarkGray text-xl font-semibold">
-              Results per page
-            </h4>
-            <PostsPerPage
-              postsPerPage={postsPerPage}
-              handlePostsPerPage={handlePostsPerPage}
-            />
-          </span> */}
-
       {/* <h4 className="text-psDarkGray text-xl font-semibold py-4 border-t border-psMediumGray">
           Favorites
         </h4>
