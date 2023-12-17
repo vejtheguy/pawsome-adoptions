@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import baseURL from "../api/baseUrl";
 import Pagination from "../components/pagination";
-import SearchInput from "../components/searchInput";
 import fetchBreeds from "../api/fetchBreeds";
 import fetchDogInfo from "../api/fetchDogInfo";
-import AgeRangeInput from "../components/ageRangeInput";
 import DogCard from "../components/dogCard";
 import SortingFilter from "../components/sorting";
-import PostsPerPage from "../components/itemsPerPage";
+import PostsPerPage from "../components/postsPerPage";
 import FavoriteCard from "../components/favorites";
 import generateMatch from "../api/generateMatch";
-import DropdownBreeds from "../components/dropdownBreeds";
+import FilterOptions from "../components/filterOptions";
 
 interface Dog {
   id: string;
@@ -63,10 +61,10 @@ const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalResults, setTotalResults] = useState<string>("");
   const [from, setFrom] = useState<number>(0);
+  const [itemsDisplayed, setItemsDisplayed] = useState<number>(0);
   const [favorites, setFavorites] = useState<Dog[]>(initialFavorites);
 
-  const itemStart = (currentPage - 1) * postsPerPage + 1;
-  const itemsOnPage = Math.min(from + postsPerPage, resultIds.length);
+  const itemsStart = (currentPage - 1) * postsPerPage + 1;
 
   useEffect(() => {
     fetchBreedNames();
@@ -102,6 +100,10 @@ const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
   useEffect(() => {
     handleFrom();
   }, [postsPerPage, from]);
+
+  useEffect(() => {
+    setItemsDisplayed(currentPage * postsPerPage);
+  }, [currentPage, postsPerPage, totalResults]);
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
@@ -151,7 +153,6 @@ const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
   const handleZipCodeInputChange = (event: string) => {
     setZipCodeInput(event);
     setError(null);
-
     // If the input is empty, clear the zip code value
     if (event === "") {
       setZipCodes("");
@@ -337,88 +338,27 @@ const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
   };
 
   return (
-    <div className="flex items-top justify-center text-psDarkGray max-w-screen-xl">
-      <aside className="flex flex-col px-4 pt-2 pb-4 bg-psLightBlue font-poppins shadow-xl h-fit rounded-lg w-[300px] min-w-300">
-        <span className="py-4 flex flex-col gap-3 justify-center border-b border-psMediumGray">
-          <h4 className="text-psDarkGray text-xl font-semibold">Breed</h4>
-          <span>
-            Selected Breeds:{" "}
-            {selectedBreeds.length === 0 ? "Any" : selectedBreeds.join(", ")}
-          </span>
-          <DropdownBreeds options={breeds} onSelect={handleSelect} />
-        </span>
-        <span className="py-4 flex flex-col gap-3 justify-center border-b border-psMediumGray">
-          <h4 className="text-psDarkGray text-xl font-semibold">Age</h4>
-          <AgeRangeInput
+    <div className="flex items-top justify-center text-psDarkGray max-w-screen-xl sm:mx-6">
+      <div className="flex flex-col px-6 sm:px-0 justify-center items-center relative">
+        <div className="flex justify-between items-center flex-col sm:flex-row w-full mb-4">
+          <FilterOptions
+            breeds={breeds}
+            selectedBreeds={selectedBreeds}
+            handleBreedSelect={handleSelect}
             ageRange={ageRange}
             handleMinAgeChange={handleMinAgeChange}
             handleMaxAgeChange={handleMaxAgeChange}
           />
-        </span>
-        <span className="py-4 flex flex-col gap-3 justify-center border-b border-psMediumGray">
-          <h4 className="text-psDarkGray text-xl font-semibold">Location</h4>
-          <SearchInput
-            label="Enter ZIP Code"
-            value={zipCodeInput}
-            onChange={handleZipCodeInputChange}
-            onSubmit={handleSearchByZipCode}
-            error={error}
-          />
-        </span>
-        <span className="pt-4 pb-8 flex flex-col gap-6 justify-center">
-          <h4 className="text-psDarkGray text-xl font-semibold">
-            Results per page
-          </h4>
-          <PostsPerPage
-            postsPerPage={postsPerPage}
-            handlePostsPerPage={handlePostsPerPage}
-          />
-        </span>
-        <h4 className="text-psDarkGray text-xl font-semibold py-4 border-t border-psMediumGray">
-          Favorites
-        </h4>
-        <span
-          className={`text-sm text-psMediumGray pb-4 ${
-            favorites.length > 0 ? "hidden" : "visible"
-          }`}
-        >
-          Select your favorite dogs and they will be added here to help you find
-          your perfect match.
-        </span>
-        <span className=" max-h-[500px] overflow-y-auto ">
-          <ul className="flex flex-col gap-3">
-            {favorites.map((favoriteDog: Dog) => {
-              return (
-                <FavoriteCard
-                  key={favoriteDog.id}
-                  dog={favoriteDog}
-                  handleFavorites={handleFavorites}
-                />
-              );
-            })}
-          </ul>
-        </span>
-        <button
-          className={`flex justify-center w-full rounded-md shadow-sm px-4 py-3 mt-4 bg-white text-sm font-semibold text-psDarkGray hover:bg-psCoral hover:text-white active:bg-gray-200 transition duration-200 ${
-            favorites.length > 0 ? "visible" : "hidden"
-          }`}
-          onClick={handleGenerateMatch}
-        >
-          Match me
-        </button>
-      </aside>
-
-      <div className="flex flex-col ml-6 justify-center items-center relative min-h-[900px] min-w-[700px]">
-        <div className="flex justify-between w-full mb-4">
-          <span className="text-psMediumGray cursor-default">
-            Showing {itemStart} - {itemsOnPage} of {totalResults} available dogs
+          <span className="text-psMediumGray cursor-default text-center mb-4 sm:mb-0">
+            Showing {itemsStart} - {itemsDisplayed} of {totalResults} available
+            dogs
           </span>
           <SortingFilter
             sortAllValue={sortAllValue}
             handleSortAll={handleSortAll}
           />
         </div>
-        <ul className="grid grid-flow-row gap-8 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+        <ul className="grid grid-flow-row gap-8 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {dogs.map((dog) => (
             <DogCard
               key={dog.id}
@@ -437,8 +377,8 @@ const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
           currentPage={currentPage}
           setCurrentPage={handlePageChange}
           updateFrom={setFrom}
-          resultStart={(currentPage - 1) * postsPerPage + 1}
-          resultEnd={from + postsPerPage}
+          resultStart={itemsStart}
+          resultEnd={itemsDisplayed}
           totalResults={totalResults}
         />
       </div>
