@@ -6,6 +6,7 @@ import fetchDogInfo from "../api/fetchDogInfo";
 import DogCard from "../components/dogCard";
 import SortingFilter from "../components/sorting";
 import FilterOptions from "../components/filterOptions";
+import PostsPerPage from "../components/postsPerPage";
 
 interface Dog {
   id: string;
@@ -185,15 +186,15 @@ const DogListPage: React.FC<DogListPageProps> = ({
     });
   };
 
-  // Hold to use for different sorting style
+  // Set sorting values
   const [sortAllValue, setSortAllValue] = useState<
     "ageAsc" | "ageDesc" | "breedAsc" | "breedDesc" | "nameAsc" | "nameDesc"
   >("breedAsc");
 
   // Sorting both value and direction in one
-  const handleSortAll = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSortAll = (sortId: string) => {
     setSortAllValue(
-      event.target.value as
+      sortId as
         | "ageAsc"
         | "ageDesc"
         | "breedAsc"
@@ -202,7 +203,7 @@ const DogListPage: React.FC<DogListPageProps> = ({
         | "nameDesc"
     );
 
-    switch (event.target.value) {
+    switch (sortId) {
       case "ageAsc":
         setSortDirection("asc");
         setSortValue("age");
@@ -309,14 +310,16 @@ const DogListPage: React.FC<DogListPageProps> = ({
             handleSearchByZipCode={handleSearchByZipCode}
             handleZipCodeInputChange={handleZipCodeInputChange}
           />
-          <span className="text-psMediumGray cursor-default text-center mb-4 sm:mb-0">
-            Showing {itemsStart} - {itemsDisplayed} of {totalResults} available
-            dogs
+          <span className="flex gap-4 justify-center items-center">
+            <PostsPerPage
+              postsPerPage={postsPerPage}
+              handlePostsPerPage={handlePostsPerPage}
+            />
+            <SortingFilter
+              sortAllValue={sortAllValue}
+              handleSortAll={handleSortAll}
+            />
           </span>
-          <SortingFilter
-            sortAllValue={sortAllValue}
-            handleSortAll={handleSortAll}
-          />
         </div>
         <ul className="grid grid-flow-row gap-8 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {dogs.map((dog) => (
