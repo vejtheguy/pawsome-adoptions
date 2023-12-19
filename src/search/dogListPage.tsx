@@ -5,9 +5,6 @@ import fetchBreeds from "../api/fetchBreeds";
 import fetchDogInfo from "../api/fetchDogInfo";
 import DogCard from "../components/dogCard";
 import SortingFilter from "../components/sorting";
-import PostsPerPage from "../components/postsPerPage";
-import FavoriteCard from "../components/favorites";
-import generateMatch from "../api/generateMatch";
 import FilterOptions from "../components/filterOptions";
 
 interface Dog {
@@ -40,12 +37,14 @@ const defaultSearch: Search = {
 };
 
 interface DogListPageProps {
-  updateMatch: (matchedDog: Dog) => void;
+  handleFavorites: (dog: Dog) => void;
+  favorites: Dog[];
 }
 
-const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
-  const storedFavorites = localStorage.getItem("favorites");
-  const initialFavorites = storedFavorites ? JSON.parse(storedFavorites) : [];
+const DogListPage: React.FC<DogListPageProps> = ({
+  handleFavorites,
+  favorites,
+}) => {
   const [breeds, setBreeds] = useState<string[]>([]);
   const [selectedBreeds, setSelectedBreeds] = useState<string[]>([]);
   const [resultIds, setResultIds] = useState<string[]>([]);
@@ -62,7 +61,6 @@ const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
   const [totalResults, setTotalResults] = useState<string>("");
   const [from, setFrom] = useState<number>(0);
   const [itemsDisplayed, setItemsDisplayed] = useState<number>(0);
-  const [favorites, setFavorites] = useState<Dog[]>(initialFavorites);
 
   const itemsStart = (currentPage - 1) * postsPerPage + 1;
 
@@ -104,10 +102,6 @@ const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
   useEffect(() => {
     setItemsDisplayed(currentPage * postsPerPage);
   }, [currentPage, postsPerPage, totalResults]);
-
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
 
   // Handle selected breeds to sorting list
   const handleSelect = (selected: string[]) => {
@@ -189,43 +183,6 @@ const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
       top: 0,
       behavior: "smooth",
     });
-  };
-
-  // Handle favorites being added or removed from list
-  const handleFavorites = (dog: Dog) => {
-    setFavorites((prevFavorites) => {
-      const isFavorite = prevFavorites.some(
-        (favoriteDog) => favoriteDog.id === dog.id
-      );
-
-      if (isFavorite) {
-        // If it is, remove it
-        return prevFavorites.filter((favoriteDog) => favoriteDog.id !== dog.id);
-      } else {
-        // If it's not, add it
-        return [...prevFavorites, dog];
-      }
-    });
-  };
-
-  const handleGenerateMatch = async () => {
-    try {
-      const matchId = await generateMatch(
-        favorites.map((favoriteDog) => favoriteDog.id)
-      );
-
-      const matchedDog = favorites.find(
-        (favoriteDog) => favoriteDog.id === matchId
-      );
-
-      if (matchedDog) {
-        updateMatch(matchedDog);
-      } else {
-        console.log("No matching dog found in favorites.");
-      }
-    } catch (error) {
-      // Handle error
-    }
   };
 
   // Hold to use for different sorting style
@@ -348,6 +305,9 @@ const DogListPage: React.FC<DogListPageProps> = ({ updateMatch }) => {
             ageRange={ageRange}
             handleMinAgeChange={handleMinAgeChange}
             handleMaxAgeChange={handleMaxAgeChange}
+            zipCodeInput={zipCodeInput}
+            handleSearchByZipCode={handleSearchByZipCode}
+            handleZipCodeInputChange={handleZipCodeInputChange}
           />
           <span className="text-psMediumGray cursor-default text-center mb-4 sm:mb-0">
             Showing {itemsStart} - {itemsDisplayed} of {totalResults} available

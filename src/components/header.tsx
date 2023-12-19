@@ -1,6 +1,28 @@
 import LogoutButton from "../auth/logout";
+import FavoriteDropdown from "./favoritesDropdown";
 
-const HeaderNav = () => {
+interface Dog {
+  id: string;
+  img: string;
+  name: string;
+  age: number;
+  zip_code: string;
+  breed: string;
+}
+
+interface HeaderNavProps {
+  favorites: Dog[];
+  favoritePing: boolean;
+  handleFavorites: (dog: Dog) => void;
+  handleGenerateMatch: () => void;
+}
+
+const HeaderNav: React.FC<HeaderNavProps> = ({
+  favorites,
+  favoritePing,
+  handleFavorites,
+  handleGenerateMatch,
+}) => {
   return (
     <header className="py-4 bg-psBlue w-full sticky top-0 z-10">
       <span className="bg-psBlue bg-opacity-60 absolute top-full h-2 w-full ">
@@ -74,7 +96,15 @@ const HeaderNav = () => {
             Pawsome Adoptions
           </span>
         </a>
-        <LogoutButton />
+        <span className="flex justify-center items-center gap-2">
+          <FavoriteDropdown
+            favorites={favorites}
+            favoritePing={favoritePing}
+            handleFavorites={handleFavorites}
+            handleGenerateMatch={handleGenerateMatch}
+          />
+          <LogoutButton />
+        </span>
       </nav>
     </header>
   );
