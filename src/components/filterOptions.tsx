@@ -3,6 +3,7 @@ import AgeRangeInput from "./ageRangeInput";
 import DropdownBreeds from "./dropdownBreeds";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
+import SearchInput from "./searchInput";
 
 interface FilterOptionsProps {
   selectedBreeds: string[];
@@ -11,9 +12,9 @@ interface FilterOptionsProps {
   ageRange: [number, number];
   handleMinAgeChange: (value: number) => void;
   handleMaxAgeChange: (value: number) => void;
-  zipCodeInput?: string;
-  handleSearchByZipCode?: (value: string) => void;
-  handleZipCodeInputChange?: (value: string) => void;
+  zipCodeInput: string;
+  handleSearchByZipCode: (value: string) => void;
+  handleZipCodeInputChange: (value: string) => void;
 }
 
 const FilterOptions: React.FC<FilterOptionsProps> = ({
@@ -105,7 +106,7 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
               handleMaxAgeChange={handleMaxAgeChange}
             />
           </span>
-          {/* <span className="py-4 flex flex-col gap-3 justify-center border-b border-psMediumGray">
+          <span className="py-4 flex flex-col gap-3 justify-center">
             <h4 className="text-psDarkGray text-xl font-semibold">Location</h4>
             <SearchInput
               label="Enter ZIP Code"
@@ -113,41 +114,9 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
               onChange={handleZipCodeInputChange}
               onSubmit={() => handleSearchByZipCode}
             />
-          </span> */}
+          </span>
         </div>
       )}
-      {/* <h4 className="text-psDarkGray text-xl font-semibold py-4 border-t border-psMediumGray">
-          Favorites
-        </h4>
-        <span
-          className={`text-sm text-psMediumGray pb-4 ${
-            favorites.length > 0 ? "hidden" : "visible"
-          }`}
-        >
-          Select your favorite dogs and they will be added here to help you find
-          your perfect match.
-        </span>
-        <span className=" max-h-[500px] overflow-y-auto ">
-          <ul className="flex flex-col gap-3">
-            {favorites.map((favoriteDog: Dog) => {
-              return (
-                <FavoriteCard
-                  key={favoriteDog.id}
-                  dog={favoriteDog}
-                  handleFavorites={handleFavorites}
-                />
-              );
-            })}
-          </ul>
-        </span>
-        <button
-          className={`flex justify-center w-full rounded-md shadow-sm px-4 py-3 mt-4 bg-white text-sm font-semibold text-psDarkGray hover:bg-psCoral hover:text-white active:bg-gray-200 transition duration-200 ${
-            favorites.length > 0 ? "visible" : "hidden"
-          }`}
-          onClick={handleGenerateMatch}
-        >
-          Match me
-        </button> */}
     </div>
   );
 };
