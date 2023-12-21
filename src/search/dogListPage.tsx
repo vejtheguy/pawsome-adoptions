@@ -62,6 +62,9 @@ const DogListPage: React.FC<DogListPageProps> = ({
   const [totalResults, setTotalResults] = useState<string>("");
   const [from, setFrom] = useState<number>(0);
   const [itemsDisplayed, setItemsDisplayed] = useState<number>(0);
+  const [sortAllValue, setSortAllValue] = useState<
+    "ageAsc" | "ageDesc" | "breedAsc" | "breedDesc" | "nameAsc" | "nameDesc"
+  >("breedAsc");
 
   const itemsStart = (currentPage - 1) * postsPerPage + 1;
 
@@ -81,14 +84,7 @@ const DogListPage: React.FC<DogListPageProps> = ({
   // Reset current page to 1 when any of the dependencies change
   useEffect(() => {
     setCurrentPage(1);
-  }, [
-    selectedBreeds,
-    sortDirection,
-    sortValue,
-    zipCodes,
-    ageRange,
-    postsPerPage,
-  ]);
+  }, [selectedBreeds, sortAllValue, zipCodes, ageRange, postsPerPage]);
 
   useEffect(() => {}, [breeds, zipCodes]);
 
@@ -97,12 +93,13 @@ const DogListPage: React.FC<DogListPageProps> = ({
   }, [resultIds]);
 
   useEffect(() => {
-    handleFrom();
-  }, [postsPerPage, from]);
-
-  useEffect(() => {
     setItemsDisplayed(currentPage * postsPerPage);
   }, [currentPage, postsPerPage, totalResults]);
+
+  useEffect(() => {
+    handleFrom();
+    scrollToTop();
+  }, [currentPage]);
 
   // Handle selected breeds to sorting list
   const handleSelect = (selected: string[]) => {
@@ -168,28 +165,21 @@ const DogListPage: React.FC<DogListPageProps> = ({
 
   // Handles the calculation and adjustment of the 'from' value based on the current page and posts per page.
   const handleFrom = () => {
-    const calculatedFrom = (currentPage - 1) * postsPerPage;
-    setFrom(calculatedFrom);
-    scrollToTop();
+    setFrom((currentPage - 1) * postsPerPage);
   };
 
   // Handles the change in the current page and updates the associated 'from' value accordingly.
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
-    handleFrom();
   };
 
+  // Creates a smooth scroll to the top of the page
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
-
-  // Set sorting values
-  const [sortAllValue, setSortAllValue] = useState<
-    "ageAsc" | "ageDesc" | "breedAsc" | "breedDesc" | "nameAsc" | "nameDesc"
-  >("breedAsc");
 
   // Sorting both value and direction in one
   const handleSortAll = (sortId: string) => {
