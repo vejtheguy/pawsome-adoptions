@@ -296,8 +296,8 @@ const DogListPage: React.FC<DogListPageProps> = ({
   };
 
   return (
-    <div className="flex items-top justify-center text-psDarkGray max-w-screen-xl sm:mx-6">
-      <div className="flex flex-col px-6 sm:px-0 justify-center items-center relative">
+    <div className="flex items-top justify-center text-psDarkGray w-full">
+      <div className="flex flex-col mx-6 sm:px-0 max-w-screen-xl justify-center items-center relative w-full">
         <div className="flex justify-between items-center flex-col sm:flex-row w-full mb-4">
           <FilterOptions
             breeds={breeds}
@@ -309,6 +309,7 @@ const DogListPage: React.FC<DogListPageProps> = ({
             zipCodeInput={zipCodeInput}
             handleSearchByZipCode={handleSearchByZipCode}
             handleZipCodeInputChange={handleZipCodeInputChange}
+            zipCodeError={error}
           />
           <span className="flex gap-4 justify-center items-center">
             <PostsPerPage
@@ -321,7 +322,7 @@ const DogListPage: React.FC<DogListPageProps> = ({
             />
           </span>
         </div>
-        <ul className="grid grid-flow-row gap-8 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <ul className="grid grid-flow-row gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full">
           {dogs.map((dog) => (
             <DogCard
               key={dog.id}
