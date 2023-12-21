@@ -15,6 +15,7 @@ interface FilterOptionsProps {
   zipCodeInput: string;
   handleSearchByZipCode: (value: string) => void;
   handleZipCodeInputChange: (value: string) => void;
+  zipCodeError: string | null;
 }
 
 const FilterOptions: React.FC<FilterOptionsProps> = ({
@@ -27,6 +28,7 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
   zipCodeInput,
   handleZipCodeInputChange,
   handleSearchByZipCode,
+  zipCodeError,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -112,7 +114,8 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
               label="Enter ZIP Code"
               value={zipCodeInput}
               onChange={handleZipCodeInputChange}
-              onSubmit={() => handleSearchByZipCode}
+              onSubmit={handleSearchByZipCode}
+              error={zipCodeError}
             />
           </span>
         </div>

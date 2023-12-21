@@ -4,7 +4,7 @@ interface SearchInputProps {
   label: string;
   value: string;
   onChange: (newValue: string) => void;
-  onSubmit: () => void;
+  onSubmit: (value: string) => void;
   error?: string | null;
 }
 
@@ -25,7 +25,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={(event) => {
           if (event.key === "Enter") {
-            onSubmit();
+            onSubmit(value);
           }
         }}
         className={`border rounded-md w-full h-10 ${
@@ -39,7 +39,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       )}
       <button
         type="button"
-        onClick={onSubmit}
+        onClick={() => onSubmit(value)}
         className="flex justify-center w-full rounded-md shadow-sm px-4 py-3 bg-white text-sm font-semibold text-gray-700 hover:bg-psCoral hover:text-white active:bg-gray-200 transition duration-200"
       >
         Search
