@@ -40,7 +40,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-psBlue bg-opacity-40 flex items-center justify-center backdrop-blur-[2px] cursor-pointer z-20">
+    <div className="fixed top-0 left-0 w-full sm:h-full h-screen bg-psBlue bg-opacity-40 flex items-center justify-center backdrop-blur-[2px] cursor-pointer z-50">
       <div
         className="relative flex justify-center items-center max-w-4xl h-full sm:h-fit"
         ref={modalRef}
@@ -48,7 +48,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
         {children}
         <FontAwesomeIcon
           icon={faClose}
-          className="absolute top-4 right-4 sm:top-2 sm:right-2 text-psMediumGray p-2 cursor-pointer hover:text-psCoral duration-300 text-7xl sm:text-3xl"
+          className="absolute top-0 right-1 text-psMediumGray p-2 cursor-pointer hover:text-psCoral duration-300 text-6xl sm:text-4xl"
           onClick={onClose}
         />
       </div>
