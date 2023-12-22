@@ -69,11 +69,6 @@ const FavoriteDropdown: React.FC<FavoriteDropdownProps> = ({
     };
   }, [isOpen]);
 
-  // Close dropdown once a selection is clicked
-  useEffect(() => {
-    setIsOpen(false);
-  }, [handleGenerateMatch]);
-
   return (
     <div className="relative inline-block text-left" ref={dropdownRef}>
       <button
