@@ -4,7 +4,7 @@ import Pagination from "../components/pagination";
 import fetchBreeds from "../api/fetchBreeds";
 import fetchDogInfo from "../api/fetchDogInfo";
 import DogCard from "../components/dogCard";
-import SortingFilter from "../components/sorting";
+import SortingFilter from "../components/sortingDropdown";
 import FilterOptions from "../components/filterOptions";
 import PostsPerPage from "../components/postsPerPage";
 

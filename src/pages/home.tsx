@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import HeaderNav from "../components/header";
-import DogListPage from "../search/dogListPage";
+import DogListPage from "./dogListPage";
 import MatchCard from "../components/matchCard";
 import generateMatch from "../api/generateMatch";
 
