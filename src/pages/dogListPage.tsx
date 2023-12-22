@@ -288,7 +288,7 @@ const DogListPage: React.FC<DogListPageProps> = ({
   return (
     <div className="flex items-top justify-center text-psDarkGray w-full">
       <div className="flex flex-col mx-6 sm:px-0 max-w-screen-xl justify-center items-center relative w-full">
-        <div className="flex justify-between items-center flex-col sm:flex-row w-full mb-4">
+        <div className="flex justify-between items-center flex-col sm:flex-row w-full mb-4 gap-4">
           <FilterOptions
             breeds={breeds}
             selectedBreeds={selectedBreeds}
@@ -301,7 +301,7 @@ const DogListPage: React.FC<DogListPageProps> = ({
             handleZipCodeInputChange={handleZipCodeInputChange}
             zipCodeError={error}
           />
-          <span className="flex gap-4 justify-center items-center">
+          <span className="flex gap-2 sm:gap-4 justify-center items-center sm:flex-nowrap flex-wrap">
             <PostsPerPage
               postsPerPage={postsPerPage}
               handlePostsPerPage={handlePostsPerPage}

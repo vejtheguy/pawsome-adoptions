@@ -24,7 +24,7 @@ const HeaderNav: React.FC<HeaderNavProps> = ({
   handleGenerateMatch,
 }) => {
   return (
-    <header className="py-4 bg-psBlue w-full sticky top-0 z-10">
+    <header className="py-4 bg-psBlue w-full sticky top-0 z-50">
       <span className="bg-psBlue bg-opacity-60 absolute top-full h-2 w-full ">
         <span className="bg-psBlue bg-opacity-30 absolute top-full h-2 w-full"></span>
       </span>
