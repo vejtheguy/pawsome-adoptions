@@ -61,24 +61,45 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
     };
   }, []);
 
-  // Prevent background scrolling when the dropdown is open
+  // Prevent background scrolling when the dropdown is open in desktop view; allow scroll when on smaller screens
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    // Makes sure overflow is set back to auto when unmounted
+    const handleOverflow = () => {
+      if (isOpen) {
+        if (window.innerWidth >= 768) {
+          // Disable scrolling on desktop
+          document.body.style.overflow = "hidden";
+        }
+      } else {
+        // Enable scrolling
+        document.body.style.overflow = "auto";
+      }
+    };
+
+    // Set initial state
+    handleOverflow();
+
+    // Event listener for window resize
+    const handleResize = () => {
+      handleOverflow(); // Adjust overflow when the window is resized
+    };
+
+    window.addEventListener("resize", handleResize);
+
     return () => {
+      // Cleanup: remove event listener
+      window.removeEventListener("resize", handleResize);
       document.body.style.overflow = "auto";
     };
   }, [isOpen]);
 
   return (
-    <div className="relative inline-block text-left" ref={dropdownRef}>
+    <div
+      className="sm:relative inline-block text-left w-full sm:w-fit"
+      ref={dropdownRef}
+    >
       <button
         type="button"
-        className="flex justify-between items-center rounded-md shadow-sm px-4 py-3 bg-psLightGray text-sm font-semibold text-psDarkGray hover:bg-psCoral hover:text-white transition duration-300"
+        className="flex justify-between items-center rounded-md shadow-sm px-4 py-3 bg-psLightGray text-sm font-semibold text-psDarkGray hover:bg-psCoral hover:text-white transition duration-300 w-full sm:w-fit"
         id="options-menu"
         onClick={handleToggle}
       >
@@ -87,7 +108,7 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
       </button>
 
       {isOpen && (
-        <div className="flex flex-col px-4 pt-2 pb-4 bg-psLightBlue font-poppins shadow-xl h-fit rounded-lg w-[300px] min-w-300 absolute top-100 left-0 mt-2 z-20">
+        <div className="flex flex-col px-4 pt-2 pb-4 bg-psLightBlue font-poppins shadow-xl h-fit rounded-lg sm:w-[300px] w-full absolute top-100 left-0 mt-2 z-20">
           <span className="py-4 flex flex-col gap-3 justify-center border-b border-psMediumGray">
             <h4 className="text-psDarkGray text-xl font-semibold">Breed</h4>
             <span>
