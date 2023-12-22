@@ -93,13 +93,13 @@ const SortingFilter: React.FC<SortingProps> = ({
         </button>
       </span>
       {isOpen && (
-        <div className="p-3 w-full bg-psLightBlue font-poppins shadow-xl rounded-lg text-md text-center font-semibold text-psDarkGray absolute top-100 right-0 mt-2 z-20 cursor-pointer">
-          <ul className="flex flex-col w-full gap-2">
+        <div className="w-full bg-psLightBlue font-poppins shadow-xl rounded-lg overflow-hidden text-md text-center text-psDarkGray absolute top-100 right-0 mt-2 z-20 cursor-pointer">
+          <ul className="flex flex-col w-full">
             {sortValues.map((value) => (
               <li
                 key={value.id}
                 onClick={() => handleSortAll(value.id)}
-                className="hover:bg-psCoral hover:text-white bg-psWhite rounded-lg w-full p-2"
+                className="hover:bg-psLightCoral hover:font-semibold bg-psWhite w-full py-2 px-4 border-b last:border-0 border-psLightGray"
               >
                 {value.value}
               </li>
