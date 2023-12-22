@@ -98,7 +98,7 @@ const FavoriteDropdown: React.FC<FavoriteDropdownProps> = ({
         </span>
       </button>
       {isOpen && (
-        <div className="flex flex-col px-4 pt-2 pb-4 bg-psLightBlue font-poppins shadow-xl h-fit rounded-lg w-[300px] min-w-300 absolute top-100 right-0 mt-2 z-20">
+        <div className="flex flex-col px-4 pt-2 pb-4 bg-psLightBlue font-poppins shadow-xl h-fit rounded-lg w-[300px] min-w-300 absolute top-100 sm:right-0 mt-2 z-20">
           <h4 className="text-psDarkGray text-xl font-semibold py-2">
             Favorites
           </h4>

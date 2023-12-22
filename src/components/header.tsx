@@ -96,7 +96,7 @@ const HeaderNav: React.FC<HeaderNavProps> = ({
             Pawsome Adoptions
           </span>
         </a>
-        <span className="flex justify-center items-center gap-2">
+        <span className="flex sm:justify-center sm:w-fit w-full justify-evenly items-center gap-2">
           <FavoriteDropdown
             favorites={favorites}
             favoritePing={favoritePing}
