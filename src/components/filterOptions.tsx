@@ -63,31 +63,17 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
 
   // Prevent background scrolling when the dropdown is open in desktop view; allow scroll when on smaller screens
   useEffect(() => {
-    const handleOverflow = () => {
-      if (isOpen) {
-        if (window.innerWidth >= 768) {
-          // Disable scrolling on desktop
-          document.body.style.overflow = "hidden";
-        }
-      } else {
-        // Enable scrolling
-        document.body.style.overflow = "auto";
+    if (isOpen) {
+      if (window.innerWidth >= 768) {
+        // Disable scrolling on desktop
+        document.body.style.overflow = "hidden";
       }
-    };
-
-    // Set initial state
-    handleOverflow();
-
-    // Event listener for window resize
-    const handleResize = () => {
-      handleOverflow(); // Adjust overflow when the window is resized
-    };
-
-    window.addEventListener("resize", handleResize);
+    } else {
+      // Enable scrolling
+      document.body.style.overflow = "auto";
+    }
 
     return () => {
-      // Cleanup: remove event listener
-      window.removeEventListener("resize", handleResize);
       document.body.style.overflow = "auto";
     };
   }, [isOpen]);
