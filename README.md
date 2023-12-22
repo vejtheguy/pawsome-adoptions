@@ -1,4 +1,4 @@
-# [Pawsome Adoptions - Fetch API Web Application](https://vejtheguy.github.io/pawsome-adoptions/) ![GitHub stars](https://img.shields.io/github/stars/vejtheguy/pawsome-adoptions.svg?style=social) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+# [Pawsome Adoptions - Fetch API Web Application](https://vejtheguy.github.io/pawsome-adoptions/) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## Project Overview
 
@@ -30,14 +30,16 @@ Pawsome Adoptions introduces a unique feature allowing users to mark their favor
 
 The project presented a set of challenges, notably in mastering the proper implementations of TypeScript with React JS. While learning to integrate TypeScript, I sought to leverage its benefits for improved code quality and developer productivity.
 
-Additionally, implementing a robust location search filter system proved to be a challenge, but it was essential for enhancing user search capabilities.
+Additionally, implementing a robust location search filter system proved to be a challenge, and will be a continued focus to improve user experience in future updates.
 
 Navigating first-time experiences with React JS and GitHub Pages involved overcoming some learning curves. Successfully deploying the website live required understanding how to integrate [react-router-dom](https://www.npmjs.com/package/react-router-dom) properly and use of [gh-pages](https://www.npmjs.com/package/gh-pages).
 
 ### Future Updates
 
-Pawsome Adoptions is an evolving project with plans for expansion. Future updates will include the addition of essential pages such as a homepage, detailed product views for dog cards, and dedicated pages for contact and about information. These enhancements aim to provide users with a more comprehensive and engaging platform for their adoption journey.
+Pawsome Adoptions is an evolving project with plans for expansion. Future updates will include the addition of essential pages such as a homepage, detailed product views for dog cards, and dedicated pages for contact and about information. Improved location search features will also be implemented overtime. These enhancements aim to provide users with a more comprehensive and engaging platform for their adoption journey.
 
 ---
 
-### [Check out Pawsome Adoptions here.](https://vejtheguy.github.io/pawsome-adoptions/)
+### [Explore the fur-tastic world of Pawsome Adoptions! 🐾🌟](https://vejtheguy.github.io/pawsome-adoptions/)
+
+[![Screenshot of Pawsome Adoptions website showcasing adorable furry friends ready for adoption in a vibrant and user-friendly environment.](https://cdn.loom.com/images/originals/4f107a1e78d745a8b5eb30d8bea3e9de.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4ubG9vbS5jb20vaW1hZ2VzL29yaWdpbmFscy80ZjEwN2ExZTc4ZDc0NWE4YjVlYjMwZDhiZWEzZTlkZS5qcGciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3MDMyODk2MjJ9fX1dfQ__&Key-Pair-Id=APKAJQIC5BGSW7XXK7FQ&Signature=gVzUy0m-zRRg4Qr185cmjWh-iVF6cv%7EAbyIc93Qj1NM4aTdqB3eiJWRd4tm9B2s-4t7o9nYW66EFmJ6oQOc09a5SRGzhkX4qH5%7EpMG%7Eu%7Ek-ke1RbPKsZ4oelGMR2uKMCY8yOYAVeNFVg0G8Pht6NYn5D984laRi9wZ0Dv9rmwChTOZkTeJl9tczF2hPgG6QukkpnVuDuOePo10JxzAyoLgtaQyoEPM2cLF8ohl-NmxPezepv0-jGTpV5NJ67-1pEPyI9dXR%7EA2kER2brgCGAm-FLtCxi3K9fDzU9EHuu6RIVfUtMupQMWdpHQi7ADGsCMlKJZ24-gzVA7FiKDjExqQ__)](https://vejtheguy.github.io/pawsome-adoptions/)
