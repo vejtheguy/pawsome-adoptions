@@ -1,7 +1,7 @@
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
-import FavoriteCard from "./favorites";
+import FavoriteCard from "./favoritesCard";
 
 interface Dog {
   id: string;
