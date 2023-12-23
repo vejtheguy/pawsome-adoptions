@@ -31,15 +31,15 @@ const MatchCard: React.FC<MatchCardProps> = ({ dog, onClose }) => {
 
   return (
     <Modal onClose={onClose}>
-      <span className="bg-psWhite rounded-lg overflow-hidden cursor-default relative flex flex-col gap-6 justify-center items-center p-8 h-full">
-        <h2 className="sm:text-6xl text-4xl font-bold text-psDarkGray text-center">
+      <span className="bg-psWhite rounded-lg overflow-hidden cursor-default relative flex flex-col sm:gap-6 gap-3 justify-center items-center p-8 h-full">
+        <h2 className="sm:text-6xl text-3xl font-bold text-psDarkGray text-center">
           Say hello to your perfect{" "}
           <span className="text-psCoral">pawsome</span> friend!
         </h2>
         <img
           src={img}
           alt={name}
-          className="w-full sm:h-[500px] h-[250px] object-cover rounded-lg"
+          className="w-full sm:h-[500px] h-[200px] object-cover rounded-lg"
         />
         <div className="flex flex-col sm:flex-row justify-center items-center">
           <h3
@@ -49,7 +49,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ dog, onClose }) => {
           >
             Meet <span className="text-psCoral">{name}!</span>
           </h3>
-          <span className="text-2xl leading-tight text-center mt-4 sm:basis-2/3 sm:pl-8 sm:mt-0 sm:text-xl sm:text-justify sm:border-l-2 sm:border-psMediumGray">
+          <span className="text-xl leading-tight text-center mt-2 sm:basis-2/3 sm:pl-8 sm:mt-0 sm:text-justify sm:border-l-2 sm:border-psMediumGray">
             <span className="text-psCoral font-semibold">{name}</span> is a{" "}
             {age === 0 ? "young puppy" : `${age}-year-old`}{" "}
             {breed.toLowerCase()}. This lovable companion is sure to bring joy,

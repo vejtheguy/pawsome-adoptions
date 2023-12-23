@@ -48,7 +48,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
         {children}
         <FontAwesomeIcon
           icon={faClose}
-          className="absolute top-0 right-1 text-psMediumGray p-2 cursor-pointer hover:text-psCoral duration-300 text-6xl sm:text-4xl"
+          className="absolute top-0 right-1 text-psMediumGray p-2 cursor-pointer hover:text-psCoral duration-300 text-5xl sm:text-4xl"
           onClick={onClose}
         />
       </div>
