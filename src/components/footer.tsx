@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-psBlue text-white mt-16 px-16 pt-8 w-full text-center md:text-start absolute top-full">
-      <div className="container mx-auto">
+      <div className="w-full max-w-screen-xl">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="mb-4 md:mb-0">
             <h1 className="text-4xl font-bold font-flower">
