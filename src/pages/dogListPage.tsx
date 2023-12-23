@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import baseURL from "../api/baseUrl";
 import Pagination from "../components/pagination";
 import fetchBreeds from "../api/fetchBreeds";

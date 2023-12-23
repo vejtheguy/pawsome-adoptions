@@ -1,5 +1,3 @@
-import React from "react";
-
 interface AgeRangeProps {
   ageRange: [number, number];
   handleMinAgeChange: (value: number) => void;
