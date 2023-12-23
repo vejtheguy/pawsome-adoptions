@@ -110,7 +110,7 @@ const FavoriteDropdown: React.FC<FavoriteDropdownProps> = ({
             Select your favorite dogs and they will be added here to help you
             find your perfect match.
           </span>
-          <span className=" max-h-[500px] overflow-y-auto ">
+          <span className="sm:max-h-[500px] max-h-80 overflow-y-auto ">
             <ul className="flex flex-col gap-3">
               {favorites.map((favoriteDog: Dog) => {
                 return (
