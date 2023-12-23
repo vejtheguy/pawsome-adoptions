@@ -44,7 +44,7 @@ const Pagination: React.FC<PaginationProps> = ({
       >
         Previous
       </button>
-      <span className="text-psMediumGray self-end">
+      <span className="text-psMediumGray self-end text-center">
         Showing {resultStart} - {resultEnd} of {totalResults} available dogs
       </span>
       <button
