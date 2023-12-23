@@ -229,7 +229,7 @@ const DogListPage: React.FC<DogListPageProps> = ({
       const data = await fetchBreeds();
       setBreeds(data);
     } catch (error) {
-      // Handle error
+      console.error("Error fetching dog breeds:", error);
     }
   };
 
@@ -238,7 +238,7 @@ const DogListPage: React.FC<DogListPageProps> = ({
       const data = await fetchDogInfo(ids);
       setDogs(data);
     } catch (error) {
-      // Handle error
+      console.error("Error fetching dog results:", error);
     }
   };
 
