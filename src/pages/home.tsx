@@ -3,6 +3,7 @@ import HeaderNav from "../components/header";
 import DogListPage from "./dogListPage";
 import MatchCard from "../components/matchCard";
 import generateMatch from "../api/generateMatch";
+import Footer from "../components/footer";
 
 interface Dog {
   id: string;
@@ -88,7 +89,7 @@ function Home() {
   }, [favorites]);
 
   return (
-    <div className="pb-20 flex flex-col justify-center items-center sm:gap-10">
+    <div className="flex flex-col justify-center items-center sm:gap-10">
       <HeaderNav
         favorites={favorites}
         favoritePing={favoritePing}
@@ -111,6 +112,7 @@ function Home() {
       {showModal && match && (
         <MatchCard dog={match} onClose={handleCloseModal} />
       )}
+      <Footer />
     </div>
   );
 }
