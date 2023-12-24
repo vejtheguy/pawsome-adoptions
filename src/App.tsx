@@ -4,7 +4,7 @@ import Home from "./pages/home";
 
 function App() {
   return (
-    <div className="bg-psWhite w-full relative">
+    <div className="bg-psWhite w-full relative min-h-screen">
       <HashRouter>
         <Routes>
           <Route path="/" element={<Login />} />
