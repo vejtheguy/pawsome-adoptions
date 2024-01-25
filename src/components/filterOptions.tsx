@@ -12,9 +12,7 @@ interface FilterOptionsProps {
   ageRange: [number, number];
   handleMinAgeChange: (value: number) => void;
   handleMaxAgeChange: (value: number) => void;
-  zipCodeInput: string;
   handleSearchByZipCode: (value: string) => void;
-  handleZipCodeInputChange: (value: string) => void;
   zipCodeError: string | null;
 }
 
@@ -25,8 +23,6 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
   ageRange,
   handleMinAgeChange,
   handleMaxAgeChange,
-  zipCodeInput,
-  handleZipCodeInputChange,
   handleSearchByZipCode,
   zipCodeError,
 }) => {
@@ -119,8 +115,6 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
             <h4 className="text-psDarkGray text-xl font-semibold">Location</h4>
             <SearchInput
               label="Enter ZIP Code"
-              value={zipCodeInput}
-              onChange={handleZipCodeInputChange}
               onSubmit={handleSearchByZipCode}
               error={zipCodeError}
             />

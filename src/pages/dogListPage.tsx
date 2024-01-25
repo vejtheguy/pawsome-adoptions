@@ -17,26 +17,6 @@ interface Dog {
   breed: string;
 }
 
-interface Search {
-  breeds?: string[];
-  zipCodes?: string[];
-  ageMin?: number;
-  ageMax?: number;
-  size?: number;
-  sort?: "asc" | "desc";
-  from?: number;
-}
-
-const defaultSearch: Search = {
-  breeds: [],
-  zipCodes: [],
-  ageMin: 0,
-  ageMax: 20,
-  size: 25,
-  sort: "asc",
-  from: 0,
-};
-
 interface DogListPageProps {
   handleFavorites: (dog: Dog) => void;
   favorites: Dog[];
@@ -51,7 +31,6 @@ const DogListPage: React.FC<DogListPageProps> = ({
   const [resultIds, setResultIds] = useState<string[]>([]);
   const [dogs, setDogs] = useState<Dog[]>([]);
   const [zipCodes, setZipCodes] = useState<string>("");
-  const [zipCodeInput, setZipCodeInput] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
   const [sortValue, setSortValue] = useState<"breed" | "name" | "age">("breed");
@@ -69,24 +48,25 @@ const DogListPage: React.FC<DogListPageProps> = ({
   const itemsStart = (currentPage - 1) * postsPerPage + 1;
 
   useEffect(() => {
-    fetchBreedNames();
-    fetchDogData(defaultSearch);
+    fetchDogData();
   }, [
     selectedBreeds,
     sortDirection,
     sortValue,
-    zipCodes,
     ageRange,
     postsPerPage,
     from,
+    zipCodes,
   ]);
+
+  useEffect(() => {
+    fetchBreedNames();
+  }, []);
 
   // Reset current page to 1 when any of the dependencies change
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedBreeds, sortAllValue, zipCodes, ageRange, postsPerPage]);
-
-  useEffect(() => {}, [breeds, zipCodes]);
 
   useEffect(() => {
     fetchDogResults(resultIds);
@@ -107,20 +87,17 @@ const DogListPage: React.FC<DogListPageProps> = ({
   };
 
   // Handle zip code search, checking that the input is valid, and setting the results
-  const handleSearchByZipCode = async () => {
-    const isValidZipCode = /^\d{5}$/.test(zipCodeInput);
+  const handleSearchByZipCode = async (zip: string) => {
+    const isValidZipCode = /^\d{5}$/.test(zip);
 
     if (isValidZipCode) {
       try {
         // Fetch data for the given ZIP code
-        const searchResult = await fetchDogData({
-          ...defaultSearch,
-          zipCodes: [zipCodeInput],
-        });
+        const searchResult = await fetchDogData();
 
         // Check if there are results for the ZIP code
         if (searchResult.total > 0) {
-          setZipCodes(zipCodeInput);
+          setZipCodes(zip);
         } else {
           setError("No results found for the given ZIP code.");
           setZipCodes("");
@@ -129,7 +106,7 @@ const DogListPage: React.FC<DogListPageProps> = ({
         setError("Error fetching data for the given ZIP code.");
       }
     } else {
-      setError("Please enter a valid 5-digit ZIP code.");
+      setZipCodes("");
     }
   };
 
@@ -139,16 +116,6 @@ const DogListPage: React.FC<DogListPageProps> = ({
 
   const handleMaxAgeChange = (value: number) => {
     setAgeRange([ageRange[0], value]);
-  };
-
-  // Handle input change of zip code
-  const handleZipCodeInputChange = (event: string) => {
-    setZipCodeInput(event);
-    setError(null);
-    // If the input is empty, clear the zip code value
-    if (event === "") {
-      setZipCodes("");
-    }
   };
 
   // Handle amount of cards on the page
@@ -242,7 +209,7 @@ const DogListPage: React.FC<DogListPageProps> = ({
     }
   };
 
-  const fetchDogData = async (search: Search) => {
+  const fetchDogData = async () => {
     const searchURL = new URL(`${baseURL}/dogs/search`);
     const params = new URLSearchParams();
     // Add the sort parameter with the format "[name|breed|age]:[asc|desc]"
@@ -255,7 +222,7 @@ const DogListPage: React.FC<DogListPageProps> = ({
 
     // Add sort parameter for zip code, check to make sure that there is at least 5 digits before append
     if (zipCodes.length === 5) {
-      params.append("zipCodes", zipCodeInput);
+      params.append("zipCodes", zipCodes);
     }
 
     // Add sort parameter for age range
@@ -296,9 +263,7 @@ const DogListPage: React.FC<DogListPageProps> = ({
             ageRange={ageRange}
             handleMinAgeChange={handleMinAgeChange}
             handleMaxAgeChange={handleMaxAgeChange}
-            zipCodeInput={zipCodeInput}
             handleSearchByZipCode={handleSearchByZipCode}
-            handleZipCodeInputChange={handleZipCodeInputChange}
             zipCodeError={error}
           />
           <span className="flex gap-2 sm:gap-4 justify-center items-center sm:flex-nowrap flex-wrap">
